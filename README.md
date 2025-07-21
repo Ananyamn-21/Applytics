@@ -70,7 +70,7 @@ It exposes REST APIs to manage users, job applications, skill analysis from job 
 | GET    | `/api/flashcards`       | Get flashcards                 |
 | POST   | `/api/flashcards`       | Create new flashcard           |
 
-➡️ Full list included in [`Applytics.postman_collection.json`](./Applytics.interview_tracker_postman_collection.json)
+➡️ Full list included in [`Applytics.postman_collection.json`](./interview_tracker_postman_collection.json)
 
 ---
 

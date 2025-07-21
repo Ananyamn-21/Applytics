@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Interview Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "interview-tracker-20250714215002"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"john123\",\n  \"password\": \"johnpass\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"john123\",\n  \"password\": \"johnpass\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Job Applications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <your_token>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "jobs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Add Job Application",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <your_token>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/jobs",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "jobs"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"companyName\": \"Google\",\n  \"role\": \"Backend Developer\",\n  \"jdUrl\": \"https://example.com/jd/google\",\n  \"status\": \"Applied\",\n  \"dateApplied\": \"2025-07-14\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Add Flashcard",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <your_token>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/flashcards",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "flashcards"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": 1,\n  \"question\": \"What is Dependency Injection?\",\n  \"answer\": \"It is a technique where one object supplies the dependencies of another object.\",\n  \"tags\": [\n    \"Spring\",\n    \"DI\"\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Flashcards for Job",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <your_token>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/flashcards/job/1",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "api",
+            "flashcards",
+            "job",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}

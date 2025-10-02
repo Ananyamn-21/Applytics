@@ -86,7 +86,7 @@ It exposes REST APIs to manage users, job applications, skill analysis from job 
 
 ```bash
 # 1. Clone the repo
-git clone git@github.com:paramesh244/Applytics.git
+git clone https://github.com/Ananyamn-21/Applytics.git
 
 # 2. Navigate to backend folder
 cd interviewtracker-backend

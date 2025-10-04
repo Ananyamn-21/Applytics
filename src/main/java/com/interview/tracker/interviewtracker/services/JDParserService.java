@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 public class JDParserService {
 
     private static final List<String> SKILLS = List.of(
-            "Java", "Spring Boot", "Angular", "React", "MongoDB", "PostgreSQL", "Python", "Docker"
+            "Java", "Spring Boot", "Angular", "React", "MongoDB", "PostgreSQL", "Python", "Docker","Flask","Docker",
+            "SQL","Nosql","JavaScript","Node.js","Express.js","AWS","Cloud","CI/CD","Kubernetes","Linux","Django"
     );
 
     public List<String> extractSkillsFromJD(String url) {

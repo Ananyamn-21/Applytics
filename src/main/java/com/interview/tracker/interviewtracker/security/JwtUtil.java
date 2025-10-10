@@ -13,20 +13,41 @@ public class JwtUtil {
 
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // generates random 256-bit key
 
-    public String generateToken(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(key)
-                .compact();
-    }
+//    public String generateToken(String username) {
+//        return Jwts.builder()
+//                .setSubject(username)
+//                .setIssuedAt(new Date(System.currentTimeMillis()))
+//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+//                .signWith(key)
+//                .compact();
+//    }
+    
+    public String generateToken(String username, Long userId) {
+    return Jwts.builder()
+            .setSubject(username)
+            .claim("userId", userId)
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+            .signWith(key)
+            .compact();
+}
+
 
     public String extractUsername(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
+    public Long extractUserId(String token) {
+    Claims claims = Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+    return claims.get("userId", Long.class);
+}
+
+    
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return username.equals(userDetails.getUsername());

@@ -16,12 +16,13 @@ public class Flashcard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long jobId;
+    private Long jobId;          // Link to Job
+    private Long evaluationId;  
+    private String conceptName;  // For missed concept
     private String question;
     private String answer;
+    private String status;       // missed, review, mastered
 
     @ElementCollection
     private List<String> tags;
-
-    // Getters and Setters
 }

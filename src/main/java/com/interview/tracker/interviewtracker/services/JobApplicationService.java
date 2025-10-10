@@ -18,6 +18,10 @@ public class JobApplicationService {
         return repo.findAll();
     }
 
+    public List<JobApplication> getJobsByUser(Long userId) {
+        return repo.findByUserId(userId);
+    }
+    
     public JobApplication save(JobApplication job) {
         return repo.save(job);
     }
@@ -29,4 +33,9 @@ public class JobApplicationService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
+    
+     public JobApplication getJobByIdAndUser(Long id, Long userId) {
+        return repo.findByIdAndUserId(id, userId).orElse(null);
+    }
 }
+

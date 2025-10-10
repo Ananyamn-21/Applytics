@@ -26,6 +26,11 @@ public class JobApplication {
 
     @ElementCollection
     private List<String> extractedSkills;
+    
+    @Transient
+    private String jdText;
+    
+     private Long userId;
 
 
 }

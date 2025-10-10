@@ -19,8 +19,20 @@ public class FlashcardController {
         return repo.save(card);
     }
 
+    @GetMapping
+    public List<Flashcard> getAll(){
+        return repo.findAll();
+    }
+    
+    
     @GetMapping("/job/{jobId}")
     public List<Flashcard> getByJob(@PathVariable Long jobId) {
         return repo.findByJobId(jobId);
     }
+    
+    @GetMapping("/status/{status}")
+    public List<Flashcard> getByStatus(@PathVariable String status) {
+    return repo.findByStatus(status);
+}
+
 }

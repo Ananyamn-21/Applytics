@@ -13,10 +13,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
     private AuthenticationManager authManager;
 
@@ -29,28 +33,81 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    // ---------------- Register ----------------
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthRequest request) {
+    public ResponseEntity<Map<String, Object>> register(@RequestBody AuthRequest request) {
         if (userRepo.findByUsername(request.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Username already taken");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of(
+                            "status", "error",
+                            "message", "Username already taken"
+                    ));
         }
+
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(encoder.encode(request.getPassword()));
         userRepo.save(user);
-        return ResponseEntity.ok("User registered successfully");
+
+        return ResponseEntity.ok(Map.of(
+                "status", "success",
+                "message", "User registered successfully"
+        ));
     }
 
+    // ---------------- Login ----------------
+//    @PostMapping("/login")
+//    public ResponseEntity<Map<String, Object>> login(@RequestBody AuthRequest request) {
+//        try {
+//            authManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+//            );
+//        } catch (Exception ex) {
+//            return ResponseEntity
+//                    .status(HttpStatus.UNAUTHORIZED)
+//                    .body(Map.of(
+//                            "status", "error",
+//                            "message", "Invalid credentials"
+//                    ));
+//        }
+//
+//        String token = jwtUtil.generateToken(request.getUsername());
+//
+//        return ResponseEntity.ok(Map.of(
+//                "status", "success",
+//                "message", "Login successful",
+//                "token", token
+//        ));
+//    }
+    
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-        try {
-            authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
-        String token = jwtUtil.generateToken(request.getUsername());
-        return ResponseEntity.ok(new AuthResponse(token));
+public ResponseEntity<Map<String, Object>> login(@RequestBody AuthRequest request) {
+    try {
+        authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+        );
+    } catch (Exception ex) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of(
+                        "status", "error",
+                        "message", "Invalid credentials"
+                ));
     }
+
+    // Fetch user from DB to get userId
+    User user = userRepo.findByUsername(request.getUsername())
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+    String token = jwtUtil.generateToken(user.getUsername(), user.getId());
+
+    return ResponseEntity.ok(Map.of(
+            "status", "success",
+            "message", "Login successful",
+            "token", token,
+            "userId", user.getId()
+    ));
 }
 
+}

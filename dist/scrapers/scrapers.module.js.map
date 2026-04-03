@@ -1,0 +1,1 @@
+{"version":3,"file":"scrapers.module.js","sourceRoot":"","sources":["../../src/scrapers/scrapers.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,+EAAuE;AACvE,2EAAmE;AAM5D,IAAM,cAAc,GAApB,MAAM,cAAc;CAAG,CAAA;AAAjB,wCAAc;yBAAd,cAAc;IAJ1B,IAAA,eAAM,EAAC;QACN,SAAS,EAAE,CAAC,oDAAsB,EAAE,gDAAoB,CAAC;QACzD,OAAO,EAAE,CAAC,oDAAsB,EAAE,gDAAoB,CAAC;KACxD,CAAC;GACW,cAAc,CAAG"}

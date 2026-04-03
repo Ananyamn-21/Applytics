@@ -1,0 +1,35 @@
+import { ConfigService } from '@nestjs/config';
+import { User } from '../models/user.model.js';
+import { JobApplication } from '../models/job-application.model.js';
+import { JobsService } from '../jobs/jobs.service.js';
+import { JobApplicationsService } from '../job-applications/job-applications.service.js';
+import { AiService } from '../ai/ai.service.js';
+import { PlatformAccountsService } from '../platform-accounts/platform-accounts.service.js';
+import { LinkedinScraperService } from '../scrapers/linkedin-scraper.service.js';
+import { NaukriScraperService } from '../scrapers/naukri-scraper.service.js';
+import { ResumeGeneratorService } from '../document-generator/resume-generator.service.js';
+export declare class AutoApplyService {
+    private readonly userModel;
+    private readonly jobApplicationModel;
+    private readonly configService;
+    private readonly jobsService;
+    private readonly jobApplicationsService;
+    private readonly aiService;
+    private readonly platformAccountsService;
+    private readonly linkedinScraper;
+    private readonly naukriScraper;
+    private readonly resumeGenerator;
+    private readonly logger;
+    private readonly maxPerHour;
+    private readonly maxPerDay;
+    private redlock;
+    private redisClient;
+    constructor(userModel: typeof User, jobApplicationModel: typeof JobApplication, configService: ConfigService, jobsService: JobsService, jobApplicationsService: JobApplicationsService, aiService: AiService, platformAccountsService: PlatformAccountsService, linkedinScraper: LinkedinScraperService, naukriScraper: NaukriScraperService, resumeGenerator: ResumeGeneratorService);
+    runAutoApply(): Promise<void>;
+    private getActiveUsers;
+    private processUser;
+    private searchAndApply;
+    private getScraperForPlatform;
+    private getHourlyApplicationCount;
+    private getDailyApplicationCount;
+}
